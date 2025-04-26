@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Science Fair Project Finder</title>
+    <!-- Bootstrap 3 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700" rel="stylesheet">
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="css/styles.css" id="theme-light">
+    <link rel="stylesheet" href="css/dark-mode.css" id="theme-dark" disabled>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><i class="fa fa-flask"></i> AI Science Fair Finder</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#home">Home</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#saved-projects" id="saved-projects-link">Saved <span id="saved-count" class="badge">0</span></a></li>
+                    <li><a href="#" id="theme-toggle">Dark Mode <i class="fa fa-moon-o"></i></a></li>
+                    <li><a href="#contact" class="btn btn-primary navbar-btn">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Jumbotron / Hero -->
+    <div class="jumbotron" id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1>Find Your Perfect AI Science Fair Project</h1>
+                    <p class="lead">Discover exciting artificial intelligence projects that will impress your judges and make learning fun!</p>
+                    <p><a class="btn btn-primary btn-lg" href="#projects" role="button">Browse Projects <i class="fa fa-arrow-right"></i></a></p>
+                </div>
+                <div class="col-md-4 hidden-xs hidden-sm">
+                    <img src="images/image.png" alt="AI Science Fair" class="img-responsive img-rounded hero-image" onerror="this.src='https://placehold.it/300x300'">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Section -->
+    <section id="search" class="bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form id="search-form">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                        <input type="text" class="form-control input-lg" id="search-input" placeholder="Search for AI projects...">
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-primary btn-lg">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="grade">Grade Level</label>
+                                            <select id="grade" class="form-control">
+                                                <option value="all">All Grades</option>
+                                                <option value="elementary">Elementary School</option>
+                                                <option value="middle">Middle School</option>
+                                                <option value="high">High School</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="category">Category</label>
+                                            <select id="category" class="form-control">
+                                                <option value="all">All Categories</option>
+                                                <option value="machine-learning">Machine Learning</option>
+                                                <option value="computer-vision">Computer Vision</option>
+                                                <option value="nlp">Natural Language Processing</option>
+                                                <option value="robotics">Robotics</option>
+                                                <option value="data-science">Data Science</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading Indicator -->
+    <div id="loading-indicator" class="text-center" style="display: none;">
+        <i class="fa fa-spinner fa-spin fa-3x"></i>
+        <p>Searching for AI projects...</p>
+    </div>
+
+    <!-- Search Results Section -->
+    <section id="search-results" style="display: none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2>Project Ideas Based On Your Search</h2>
+                    <hr class="divider">
+                </div>
+            </div>
+            <div class="row" id="results-container">
+                <!-- Results will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Saved Projects Section -->
+    <section id="saved-projects" style="display: none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2>Your Saved Projects</h2>
+                    <hr class="divider">
+                </div>
+            </div>
+            <div class="row" id="saved-projects-container">
+                <!-- Saved projects will be dynamically inserted here -->
+            </div>
+            <div class="row" id="no-saved-projects" style="display: none;">
+                <div class="col-md-12 text-center">
+                    <p class="lead">You haven't saved any projects yet.</p>
+                    <p><a href="#projects" class="btn btn-primary">Browse Projects</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <h2>Why Choose Our Platform?</h2>
+                    <hr class="divider">
+                </div>
+            </div>
+            <div class="row text-center features">
+                <div class="col-md-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fa fa-cogs"></i>
+                        </div>
+                        <h3>Hands-on Projects</h3>
+                        <p>Get step-by-step instructions and resources to build your own AI projects.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fa fa-graduation-cap"></i>
+                        </div>
+                        <h3>Educational Resources</h3>
+                        <p>Access tutorials, videos, and learning materials to understand AI concepts.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fa fa-search"></i>
+                        </div>
+                        <h3>Easy Discovery</h3>
+                        <p>Find projects that match your interests and skill level with our smart filters.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Projects -->
+    <section id="projects" class="bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2>Popular Science Fair Projects</h2>
+                    <hr class="divider">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="thumbnail" data-project-id="1">
+                        <img src="images/image.png" alt="Project Image" onerror="this.src='https://placehold.it/800x500'">
+                        <div class="caption">
+                            <h3>Image Recognition System</h3>
+                            <p class="text-muted"><span class="label label-primary">High School</span> <span class="label label-info">Computer Vision</span></p>
+                            <p>Build a machine learning model that can identify objects in images using TensorFlow.</p>
+                            <p>
+                                <button class="btn btn-primary view-static-project" data-project-id="1">View Project</button>
+                                <button class="btn btn-default save-project" data-project-id="1">Save <i class="fa fa-bookmark-o"></i></button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="thumbnail" data-project-id="2">
+                        <img src="images/image.png" alt="Project Image" onerror="this.src='https://placehold.it/800x500'">
+                        <div class="caption">
+                            <h3>Sentiment Analysis Tool</h3>
+                            <p class="text-muted"><span class="label label-primary">Middle School</span> <span class="label label-info">NLP</span></p>
+                            <p>Create a program that can determine whether text is positive, negative, or neutral.</p>
+                            <p>
+                                <button class="btn btn-primary view-static-project" data-project-id="2">View Project</button>
+                                <button class="btn btn-default save-project" data-project-id="2">Save <i class="fa fa-bookmark-o"></i></button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="thumbnail" data-project-id="3">
+                        <img src="images/image.png" alt="Project Image" onerror="this.src='https://placehold.it/800x500'">
+                        <div class="caption">
+                            <h3>Smart Plant Monitor</h3>
+                            <p class="text-muted"><span class="label label-primary">Elementary</span> <span class="label label-info">Robotics</span></p>
+                            <p>Build a simple device that monitors soil moisture and automatically waters plants.</p>
+                            <p>
+                                <button class="btn btn-primary view-static-project" data-project-id="3">View Project</button>
+                                <button class="btn btn-default save-project" data-project-id="3">Save <i class="fa fa-bookmark-o"></i></button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a href="#" id="view-all-projects" class="btn btn-lg btn-default">View All Projects <i class="fa fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section id="cta">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center">
+                    <h2>Ready to Start Your AI Science Fair Project?</h2>
+                    <p class="lead">Sign up for our newsletter to get the latest project ideas and resources.</p>
+                    <form class="form-inline" id="newsletter-form">
+                        <div class="form-group">
+                            <input type="email" class="form-control input-lg" placeholder="Your Email Address" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4><i class="fa fa-flask"></i> AI Science Fair Finder</h4>
+                    <p>Helping students discover and create amazing AI science fair projects since 2015.</p>
+                    <p class="social-icons">
+                        <a href="#"><i class="fa fa-facebook-square fa-2x"></i></a>
+                        <a href="#"><i class="fa fa-twitter-square fa-2x"></i></a>
+                        <a href="#"><i class="fa fa-youtube-square fa-2x"></i></a>
+                        <a href="#"><i class="fa fa-instagram fa-2x"></i></a>
+                    </p>
+                </div>
+                <div class="col-md-2">
+                    <h4>Links</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#saved-projects">Saved Projects</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4>Categories</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Machine Learning</a></li>
+                        <li><a href="#">Computer Vision</a></li>
+                        <li><a href="#">Natural Language Processing</a></li>
+                        <li><a href="#">Robotics</a></li>
+                        <li><a href="#">Data Science</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4>Contact Us</h4>
+                    <address>
+                        <strong>AI Science Fair Finder</strong><br>
+                        123 Tech Avenue<br>
+                        San Francisco, CA 94107<br>
+                        <i class="fa fa-phone"></i> (123) 456-7890<br>
+                        <i class="fa fa-envelope-o"></i> <a href="mailto:info@aifair.edu">info@aifair.edu</a>
+                    </address>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>&copy; 2015-2023 AI Science Fair Finder. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Details Modal -->
+    <div class="modal fade" id="project-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modal-title">Project Details</h4>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <!-- Project details will be inserted here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="modal-save-project">Save Project</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Alert Modal -->
+    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><i class="fa fa-check-circle text-success"></i> Success</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="success-message">Operation completed successfully!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Projects Modal -->
+    <div class="modal fade" id="all-projects-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">All Available Projects</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="all-projects-grade">Filter by Grade</label>
+                                <select id="all-projects-grade" class="form-control">
+                                    <option value="all">All Grades</option>
+                                    <option value="elementary">Elementary School</option>
+                                    <option value="middle">Middle School</option>
+                                    <option value="high">High School</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="all-projects-category">Filter by Category</label>
+                                <select id="all-projects-category" class="form-control">
+                                    <option value="all">All Categories</option>
+                                    <option value="machine-learning">Machine Learning</option>
+                                    <option value="computer-vision">Computer Vision</option>
+                                    <option value="nlp">Natural Language Processing</option>
+                                    <option value="robotics">Robotics</option>
+                                    <option value="data-science">Data Science</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="all-projects-search">Search</label>
+                                <input type="text" id="all-projects-search" class="form-control" placeholder="Search projects...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="all-projects-container">
+                        <!-- Will be populated with all projects -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Bootstrap 3 JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html> 

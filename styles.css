@@ -1,0 +1,275 @@
+/* 
+* AI Science Fair Project Finder
+* 2015-style CSS
+*/
+
+/* General styles */
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    color: #333;
+    padding-top: 70px;
+    background-color: #f5f5f5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', Arial, sans-serif;
+    font-weight: 700;
+}
+
+a {
+    color: #337ab7;
+    transition: all 0.3s ease;
+}
+
+a:hover, a:focus {
+    color: #23527c;
+    text-decoration: none;
+}
+
+.btn {
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.btn-primary:hover {
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+/* Navigation */
+.navbar-default {
+    background-color: #fff;
+    border-color: #e7e7e7;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: #337ab7 !important;
+}
+
+.navbar-brand i {
+    margin-right: 5px;
+}
+
+.navbar-nav > li > a.btn {
+    margin-top: 8px;
+    padding: 6px 12px;
+    color: #fff !important;
+}
+
+/* Jumbotron / Hero */
+.jumbotron {
+    background: url('https://placehold.it/1920x600') center center;
+    background-size: cover;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    position: relative;
+    padding: 80px 0;
+    margin-bottom: 0;
+}
+
+.jumbotron:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(41, 128, 185, 0.7);
+    background: linear-gradient(135deg, rgba(41, 128, 185, 0.8) 0%, rgba(142, 68, 173, 0.8) 100%);
+}
+
+.jumbotron .container {
+    position: relative;
+    z-index: 2;
+}
+
+.jumbotron h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero-image {
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Sections */
+section {
+    padding: 60px 0;
+}
+
+section h2 {
+    margin-bottom: 20px;
+}
+
+.bg-light {
+    background-color: #f8f9fa;
+}
+
+.divider {
+    max-width: 100px;
+    border-top: 3px solid #337ab7;
+    margin: 20px auto 30px;
+}
+
+/* Search Section */
+#search {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.panel {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: none;
+}
+
+.panel-default {
+    border-top: 3px solid #337ab7;
+}
+
+.input-group-addon {
+    background-color: #f5f5f5;
+}
+
+/* Features Section */
+.features {
+    margin-top: 40px;
+}
+
+.feature-box {
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+.feature-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.feature-icon {
+    font-size: 36px;
+    color: #337ab7;
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 50%;
+    background-color: #f5f7fa;
+    border: 2px solid #e5e8ed;
+}
+
+/* Projects Section */
+.thumbnail {
+    border: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.thumbnail:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+
+.thumbnail img {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.thumbnail .caption {
+    padding: 20px;
+}
+
+.label {
+    margin-right: 5px;
+    font-weight: normal;
+}
+
+/* Call to Action */
+#cta {
+    background: #337ab7;
+    background: linear-gradient(135deg, #337ab7 0%, #9b59b6 100%);
+    color: #fff;
+    padding: 80px 0;
+}
+
+#cta h2 {
+    margin-bottom: 20px;
+}
+
+#cta .form-inline .form-group {
+    width: 70%;
+    margin-right: 10px;
+}
+
+#cta .form-inline .form-control {
+    width: 100%;
+}
+
+#cta .btn-primary {
+    background-color: #fff;
+    color: #337ab7;
+    border-color: #fff;
+}
+
+#cta .btn-primary:hover {
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 60px 0 30px;
+}
+
+footer h4 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+footer a {
+    color: #bdc3c7;
+}
+
+footer a:hover {
+    color: #fff;
+}
+
+.social-icons a {
+    margin-right: 10px;
+}
+
+footer hr {
+    border-top-color: #34495e;
+    margin: 30px 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+    .jumbotron {
+        padding: 60px 0;
+    }
+    
+    .jumbotron h1 {
+        font-size: 32px;
+    }
+    
+    #cta .form-inline .form-group {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+} 
